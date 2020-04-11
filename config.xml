@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets"
         xmlns:gap="http://phonegap.com/ns/1.0"
-        id="com.phonegap.hello-world"
+        id="nl.Kevoelie.Karaoke"
         version="0.0.1">
     <name>Karaoke</name>
 
@@ -45,5 +45,10 @@
     <gap:splash src="res/screen/ios/screen-ipad-portrait.png"      gap:platform="ios"     width="768" height="1024" />
     <gap:splash src="res/screen/ios/screen-ipad-landscape.png"     gap:platform="ios"     width="1024" height="768" />
     <gap:splash src="res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone" />
-		<gap:plugin name="cordova-plugin-whitelist" source="npm" />
+		<gap:plugin name="cordova-plugin-whitelist" source="npm"/>
+		<plugin name="cordova-plugin-whitelist" spec="1" />
+		<access origin="*" />
+		<allow-intent href="*" />
+		<allow-navigation href="*" />
+
 </widget>
