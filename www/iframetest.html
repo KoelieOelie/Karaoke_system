@@ -1,0 +1,22 @@
+<html>
+<head><title>Main page</title></head>
+<body>
+<script>
+function get_iframe(ifr_id) {
+ // gets the object that refers to the iframe, uasing its id
+ var myIFrame = document.getElementById(ifr_id);
+
+ // Define a new text that will replace the content of the iframe
+ content = '<font color="blue">Text added with Javascript, from the main page</font>';
+
+ // Modify the iframe content
+ myIFrame.contentWindow.document.body.innerHTML = content;
+
+}
+</script>
+
+<h3>Main page</h3>
+<a href="#" onclick="get_iframe('ifr')">Retrieve /Modify IFrame</a><br><br>
+<iframe src="dummy.htm" id="ifr" name="ifr" onLoad="alert(this.contentWindow.location);"></iframe>
+</body>
+</html>

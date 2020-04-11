@@ -1,45 +1,61 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-var app = {
-    initialize: function() {
-        this.bind();
-    },
-    bind: function() {
-        document.addEventListener('deviceready', this.deviceready, false);
-    },
-    deviceready: function() {
-        // This is an event handler function, which means the scope is the event.
-        // So, we must explicitly called `app.report()` instead of `this.report()`.
-        app.report('deviceready');
-    },
-		songs_list_render:{},
-    report: function(id) {
-        // Report the event in the console
-        console.log("Report: " + id);
+function run(ip) {
+	console.log("Submitted");
+	$("#form").addClass("hide");
+	$( "input#base_url" ).val(ip);
+	$('#info .pending').removeClass("hide");
+	$('.complete').addClass("hide");
+	$('.Failed').addClass("hide");
+	$("#info").removeClass("hide");
+	setTimeout(myFunction, 3000);
+}
+function myFunction() {
+	console.log("loading");
+	var url="http://"+$( "input#base_url" ).val()+"/Karaoke_system/get_songs.php?Version=0.0.1";
+	var request = $.ajax({
+		url: url,
+		method: "POST",
+		data: { query : "get_info" },
+		dataType: "json"
+	});
+	request.done(function( msg ) {
+		console.log("json cofurm");
+		document.querySelector('#info .pending').className += ' hide';
+		var completeElem = document.querySelector('#info .complete');
+		completeElem.className = completeElem.className.split('hide').join('');
+		render_songs(msg);
+		console.log(JSON.stringify(msg));
+		msg.forEach((row, i) => {
+			console.log(JSON.stringify(row));
+		});
+	});
+	request.fail(function( jqXHR, textStatus ) {
+		console.log(jqXHR);
+		switch (jqXHR.status) {
+			case 0:
+				console.log("url loading error");
+				Error_handeler("url loading error");
+				break;
+			case 200:
+				console.log("invalid json return");
+				Error_handeler("invalid json return");
+				break;
+			default:
+				Error_handeler(jqXHR.status);
+				console.log("songs_loading_faild:"+jqXHR.status);
+		}
+	});
+}
+function Error_handeler(error) {
+	$('.pending').addClass("hide");
+	$('.complete').addClass("hide");
+	$('.Failed').removeClass("hide");
+	$(".Failed span").text(error+"");
+	$("#form").removeClass("hide");
+}
+function render_songs(songs) {
+	load_page("main");
+	$("#info").addClass("hide");
+	//var songs_contaner = $("data#songs_list");
+	get_iframe("ifr");
 
-        // Toggle the state from "pending" to "complete" for the reported ID.
-        // Accomplished by adding .hide to the pending element and removing
-        // .hide from the complete element.
-				parent.location.hash = "hello";
-        document.querySelector('#' + id + ' .pending').className += ' hide';
-        var completeElem = document.querySelector('#' + id + ' .complete');
-        completeElem.className = completeElem.className.split('hide').join('');
-				location.hash = "songs_list";
-    }
-};
+}

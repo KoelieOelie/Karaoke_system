@@ -1,0 +1,25 @@
+.ui-icon-player-mode-def:after {
+	/* Make your icon fit */
+    background-size: 18px 18px;
+	background-image: url("iconimg.svg");
+}
+
+.ui-icon-player-mode-def:after {
+	/* Make your icon fit */
+    background-size: 18px 18px;
+	background-image: url("iconimg.svg");
+}
+
+
+/* Fallback */
+.ui-nosvg .ui-icon-player-mode-kar:after {
+	/* Make your icon fit */
+    background-size: 18px 18px;
+	background-image: url("iconimg.png");
+}
+
+.ui-nosvg .ui-icon-player-mode-kar:after {
+	/* Make your icon fit */
+    background-size: 18px 18px;
+	background-image: url("iconimg.png");
+}
