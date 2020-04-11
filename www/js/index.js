@@ -18,6 +18,9 @@ function myFunction() {
 	var request = $.ajax({
 		url: url,
 		method: "POST",
+		jsonpCallback: 'processJSONPResponse',
+		dataType: "jsonp", // jsonp
+		contentType: "application/json; charset=utf-8",
 		data: { query : "get_info" },
 		dataType: "json"
 	});
