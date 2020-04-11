@@ -1,10 +1,11 @@
 function run(ip) {
 	console.log("Submitted");
 	$("#form").addClass("hide");
-	//if (true) {
+	if (ip != "") {
+		$( "input#base_url" ).val(ip);
 		console.log("ilink"+ip);
-	//}
-	$( "input#base_url" ).val(ip);
+	}
+
 	$('#info .pending').removeClass("hide");
 	$('.complete').addClass("hide");
 	$('.Failed').addClass("hide");
