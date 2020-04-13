@@ -47,7 +47,7 @@ function get_iframe(ifr_id) {
 
  // Modify the iframe content
  console.log("innerHTM = content");
- myIFrame.contentWindow.document.body.innerHTML = content;
+ myIFrame.contentWindow.document.body.innerHTML = "content";
 }
 function keuze_veranderd(iframe) {
 	var cScr=iframe.contentWindow.location.href;
