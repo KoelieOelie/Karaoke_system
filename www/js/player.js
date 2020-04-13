@@ -31,7 +31,7 @@ function get_iframe(ifr_id) {
  var temp, item, a, i,songs;
  console.log("var temp, item, a, i,songs");
  temp = document.getElementsByTagName("template")[0];
- console.log();
+ console.log(temp);
   console.log("temp=template");
  item = temp.content.querySelector("div");
  console.log("item=query");
