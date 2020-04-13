@@ -23,6 +23,8 @@
     <icon src="Icon.png" />
 		<gap:plugin name="cordova-plugin-whitelist" source="npm"/>
 		<plugin name="cordova-plugin-whitelist" spec="1" />
+		<gap:plugin name="cordova-plugin-dialogs" ource="npm"/>
+		<plugin name="cordova-plugin-dialogs" spec="1" />
 		<!-- Allow images, xhrs, etc. to google.com -->
 			<access origin="http://google.com" />
 			<access origin="https://google.com" />
