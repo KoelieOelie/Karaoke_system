@@ -42,7 +42,7 @@ function get_iframe(ifr_id) {
  console.log(JSON.stringify(songs_list));
 
  // Define a new text that will replace the content of the iframe
- content = item.innerHTML;
+ content = temp.innerHTML;
  console.log("content = item");
 
  // Modify the iframe content
