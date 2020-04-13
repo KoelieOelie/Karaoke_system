@@ -14,12 +14,11 @@ function run(ip) {
 }
 function myFunction() {
 	console.log("loading");
-	var url="http://"+$( "input#base_url" ).val()+"/Karaoke_system/get_songs.php?Version=0.0.1";
+	var url="https://"+$( "input#base_url" ).val()+"/Karaoke_system/get_songs.php?Version=0.0.1";
 	var request = $.ajax({
 		url: url,
-		method: "POST",
-		jsonpCallback: 'processJSONPResponse',
-		dataType: "jsonp", // jsonp
+		method: "POST",crossDomain: true, cache: false,
+		dataType: "json",
 		contentType: "application/json; charset=utf-8",
 		data: { query : "get_info" },
 		dataType: "json"
