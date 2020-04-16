@@ -1,0 +1,18 @@
+[
+	{
+		"title":"A demo",
+		"artists":"Jackwing",
+		"alburm":"Karaoke",
+		"art":["logo","file"],
+	},{
+		"title":"Demo Title",
+		"artists":"Jackwing",
+		"alburm":"Karaoke",
+		"art":["logo","file"],
+	},{
+		"title":"Demo Title",
+		"artists":"Jackwing",
+		"alburm":"Karaoke",
+		"art":["https://imgur.com/a/mRWxyD3","web"],
+	}
+]
