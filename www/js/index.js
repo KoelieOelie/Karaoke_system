@@ -87,6 +87,23 @@ function Error_handeler(error) {
 	$(".Failed span").text(error+"");
 	$("#form").removeClass("hide");
 }
+function success() {
+		return this.src;
+    console.log("success: ", this.src);
+  }
+
+  function failure(why) {
+		if (this.src) {
+			var src = this.src;
+		}else {
+			var src=why;
+		}
+		return "img/tump_load_error.png";
+    console.log("failure: ", src);
+  }
+
+
+  // this succeeds
 function render_songs(songs) {
 	console.log("loading of songs");
 	load_page("main");
@@ -98,9 +115,17 @@ function render_songs(songs) {
 		var title = $.parseHTML(row.title,null,false).reduce((string,node)=> string += node.textContent, "" );
 		var artists = $.parseHTML(row.artists,null,false).reduce((string,node)=> string += node.textContent, "" );
 		var alburm = $.parseHTML(row.alburm,null,false).reduce((string,node)=> string += node.textContent, "" );
+		switch (row.art[1]) {
+			case "expression":
+
+				break;
+			default:
+				failure("not falid json on row "+i);
+		}
 		songs_contaner.attr('data-song'+i+'-title', title);
 		songs_contaner.attr('data-song'+i+'-artists', artists);
 		songs_contaner.attr('data-song'+i+'-alburm', alburm);
+		console.log(checkImage("http://www.google.com/intl/en_com/images/srpr/logo3w.png", success, failure));
 		console.log(JSON.stringify(row));
 		console.log(i);
 		count++;
