@@ -13,8 +13,7 @@ function run(ip) {
 	setTimeout(myFunction, 3000);
 }
 function myFunction() {
-
-	if (typeof navigator.notification.confirm !== 'undefined')
+	if (window.wizUtils)
     {
 				console.log("loading");
 				var url="https://"+$( "input#base_url" ).val()+"/Karaoke_system/get_songs.php?Version=0.0.1";
