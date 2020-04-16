@@ -13,43 +13,73 @@ function run(ip) {
 	setTimeout(myFunction, 3000);
 }
 function myFunction() {
-	console.log("loading");
-	var url="https://"+$( "input#base_url" ).val()+"/Karaoke_system/get_songs.php?Version=0.0.1";
-	var request = $.ajax({
-		url: url,
-		method: "POST",crossDomain: true, cache: false,
-		dataType: "json",
-		contentType: "application/json; charset=utf-8",
-		data: { query : "get_info" },
-		dataType: "json"
-	});
-	request.done(function( msg ) {
-		console.log("json cofurm");
-		document.querySelector('#info .pending').className += ' hide';
-		var completeElem = document.querySelector('#info .complete');
-		completeElem.className = completeElem.className.split('hide').join('');
-		render_songs(msg);
-		console.log(JSON.stringify(msg));
-		msg.forEach((row, i) => {
-			console.log(JSON.stringify(row));
-		});
-	});
-	request.fail(function( jqXHR, textStatus ) {
-		console.log(jqXHR);
-		switch (jqXHR.status) {
-			case 0:
-				console.log("url loading error");
-				Error_handeler("url loading error");
-				break;
-			case 200:
-				console.log("invalid json return");
-				Error_handeler("invalid json return");
-				break;
-			default:
-				Error_handeler(jqXHR.status);
-				console.log("songs_loading_faild:"+jqXHR.status);
-		}
-	});
+
+	if (typeof window.sqlite !== 'undefined')
+    {
+				console.log("loading");
+				var url="https://"+$( "input#base_url" ).val()+"/Karaoke_system/get_songs.php?Version=0.0.1";
+        db = window.sqlitePlugin.openDatabase({name: "my.db", createFromLocation: 1});  // tries to use prepopulated database
+				var request = $.ajax({
+					url: url,
+					method: "POST",crossDomain: true, cache: false,
+					dataType: "json",
+					contentType: "application/json; charset=utf-8",
+					data: { query : "get_info" },
+					dataType: "json"
+				});
+				request.done(function( msg ) {
+					request_done(msg);
+				});
+				request.fail(function( jqXHR, textStatus ) {
+					console.log(JSON.stringify(jqXHR));
+					switch (jqXHR.status) {
+						case 0:
+							console.log("url loading error");
+							Error_handeler("url loading error");
+							break;
+						case 200:
+							console.log("invalid json return");
+							Error_handeler("invalid json return");
+							break;
+						default:
+							Error_handeler(jqXHR.status);
+							console.log("songs_loading_faild:"+jqXHR.status);
+					}
+				});
+    }
+    else
+    {
+			console.log("loading from memory");
+			var json=[
+				{
+					"title":"A demo",
+					"artists":"Jackwing",
+					"alburm":"Karaoke",
+					"art":["logo","file"]
+				},{
+					"title":"Demo Title",
+					"artists":"Jackwing",
+					"alburm":"Karaoke",
+					"art":["logo","file"]
+				},{
+					"title":"Do i say more",
+					"artists":"Jackwing",
+					"alburm":"Karaoke",
+					"art":["https://imgur.com/a/mRWxyD3","web"]
+				}
+			];
+			console.log(JSON.stringify(json));
+			request_done(json);
+
+    }
+}
+function request_done(msg) {
+	done_spach=true;
+	console.log("json cofurm");
+	render_songs(msg);
+	document.querySelector('#info .pending').className += ' hide';
+	var completeElem = document.querySelector('#info .complete');
+	completeElem.className = completeElem.className.split('hide').join('');
 }
 function Error_handeler(error) {
 	$('.pending').addClass("hide");
@@ -59,9 +89,25 @@ function Error_handeler(error) {
 	$("#form").removeClass("hide");
 }
 function render_songs(songs) {
+	console.log("loading of songs");
 	load_page("main");
 	$("#info").addClass("hide");
-	//var songs_contaner = $("data#songs_list");
+	var songs_contaner = $("data#songs_list");
+	var count = 0;
+	console.log(JSON.stringify(songs));
+	songs.forEach((row, i) => {
+		var title = $.parseHTML(row.title,null,false).reduce((string,node)=> string += node.textContent, "" );
+		var artists = $.parseHTML(row.artists,null,false).reduce((string,node)=> string += node.textContent, "" );
+		var alburm = $.parseHTML(row.alburm,null,false).reduce((string,node)=> string += node.textContent, "" );
+		songs_contaner.attr('data-song'+i+'-title', title);
+		songs_contaner.attr('data-song'+i+'-artists', artists);
+		songs_contaner.attr('data-song'+i+'-alburm', alburm);
+		console.log(JSON.stringify(row));
+		console.log(i);
+		count++;
+	});
+	songs_contaner.attr('data-songs-cont', count);
+	console.log(songs_contaner.innerHTML);
 	get_iframe("ifr");
 
 }

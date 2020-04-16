@@ -1,53 +1,32 @@
-function showContent() {
-	console.log("update gegevens");
-	var myArr = ["Audi", "BMW", "Ford", "Honda", "Jaguar", "Nissan"];
-	var myIFrame = document.getElementById("ifr");
-	myIFrame.contentWindow.document.body.innerHTML="";
-	var temp, item, a, i,songs;
-	//get the template element:
-	temp = document.getElementsByTagName("template")[0];
-	var songs_contaner =document.getElementsByTagName("data")[0];
-	var songs_list=JSON.parse(JSON.stringify(songs_contaner.dataset));
-	console.log(JSON.stringify(songs_list));
-	//get the DIV element from the template:
-	item = temp.content.querySelector("div");
-	//for each item in the array:
-	for (i = 0; i < myArr.length; i++) {
-		//Create a new node, based on the template:
-		a = document.importNode(item, true);
-		console.log(a);
-
-		//Add data from the array:
-		a.innerHTML += myArr[i];
-		//append the new node wherever you like:
-		myIFrame.contentWindow.document.body.appendChild(a);
-	}
-}
 function get_iframe(ifr_id) {
-	console.log("callin w id "+ifr_id);
- // gets the object that refers to the iframe, uasing its id
- var myIFrame = document.getElementById(ifr_id);
- console.log("var myIFrame");
- var temp, item, a, i,songs;
- console.log("var temp, item, a, i,songs");
- temp = document.getElementsByTagName("template")[0];
- console.log(temp);
-  console.log("temp=template");
- item = temp.content.querySelector("div");
- console.log("item=query");
- var songs_contaner =document.getElementsByTagName("data")[0];
- console.log("var songs_contaner");
- var songs_list=JSON.parse(JSON.stringify(songs_contaner.dataset));
- console.log("var songs_list");
- console.log(JSON.stringify(songs_list));
+	console.log("update gegevens");
+	var songs_contaner =document.getElementsByTagName("data")[0];
+	console.log("var songs_contaner");
+	var songs_list=JSON.parse(JSON.stringify(songs_contaner.dataset));
+	var songs_to_render=songs_list.songsCont;
+	if (songs_to_render!=-1) {
+		console.log(JSON.stringify(songs_list));
+		var songs_list_content="";
+		var myIFrame = document.getElementById(ifr_id);
+		var template = $("template#iframe_template")[0];
 
- // Define a new text that will replace the content of the iframe
- content = temp.innerHTML;
- console.log("content = item");
 
- // Modify the iframe content
- console.log("innerHTM = content");
- myIFrame.contentWindow.document.body.innerHTML = "content";
+		template.content.children[0].children[0].innerText="Hello";
+		console.log(template);
+		for (var i = 0; i <= songs_to_render; i++) {
+			$(template.content.children[0]).attr('data-songid',i);
+			template.content.children[0].children[0].innerText=songs_list["song"+i+"Title"];
+			template.content.children[0].children[0].innerText=songs_list["song"+i+"Title"];
+			template.content.children[0].children[1].innerText=songs_list["song"+i+"Artists"];
+			template.content.children[0].children[2].innerText=songs_list["song"+i+"Alburm"];
+			songs_list_content+=template.innerHTML;
+		}
+
+
+	 myIFrame.contentWindow.document.body.innerHTML = songs_list_content;
+	} else {
+		Error_handeler("Internal error");
+	}
 }
 function keuze_veranderd(iframe) {
 	var cScr=iframe.contentWindow.location.href;
@@ -55,7 +34,9 @@ function keuze_veranderd(iframe) {
 	var id=cScr.replace(oSrc, "");
 	if (id!=""&&oSrc!="") {
 		console.log(id);
-		$("#title_song_playing").text(id);
+		console.log(title);
+		var title=JSON.parse(JSON.stringify(document.getElementsByTagName("data")[0].dataset))["song"+id+"Title"];
+		$("#title_song_playing").text(title);
 		load_page("player");
 	}
 	if (oSrc=="") {

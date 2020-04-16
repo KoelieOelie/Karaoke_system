@@ -23,16 +23,20 @@
 		}
 
 		function onBackKeyDown(e) {
-			var cPage=$('body').data('page');
 			e.preventDefault();
-			var page=pages[cPage][0];
-			var fun=pages[cPage][1];
-			if (page=="end"&&fun=="exitApp") {
-				navigator.notification.confirm("Are you sure you want to exit ?", onConfirm, "Confirmation", ["Yes","No"]);
-			} else {
-				console.log(page+" "+fun);
-				load_page(page);
-			}
+
+			if (done_spach==true) {
+				var cPage=$('body').data('page');
+				var page=pages[cPage][0];
+				var fun=pages[cPage][1];
+				if (page=="end"&&fun=="exitApp") {
+					navigator.notification.confirm("Are you sure you want to exit ?", onConfirm, "Confirmation", ["Yes","No"]);
+				} else {
+					console.log(page+" "+fun);
+					load_page(page);
+				}
+			} 	
+
 		  // Prompt the user with the choice
 		}
 

@@ -11,6 +11,9 @@
 	<link rel="stylesheet" href="_static/css/jquery.mobile.min.css" />
 	<script src="_static/js/jquery.min.js"></script>
 	<script src="_static/js/jquery.mobile.min.js"></script>
+	<script type="text/javascript">
+		var done_spach = false;
+	</script>
 	<script src="js/nav.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
@@ -45,7 +48,7 @@
 
 
 
-			<template>
+			<template id="iframe_template">
 				<div class="song_row" data-songid="unf" onclick="load_song(this)">
 					<h1>Title</h1>
 					<h2>Arties</h2>
