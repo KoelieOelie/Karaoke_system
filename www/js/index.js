@@ -125,7 +125,7 @@ function render_songs(songs) {
 		songs_contaner.attr('data-song'+i+'-title', title);
 		songs_contaner.attr('data-song'+i+'-artists', artists);
 		songs_contaner.attr('data-song'+i+'-alburm', alburm);
-		console.log(checkImage("http://www.google.com/intl/en_com/images/srpr/logo3w.png", success, failure));
+		console.log(checkImage("http://www.google.com/intl/en_com/images/srpr/logo3w.png", success(), failure()));
 		console.log(JSON.stringify(row));
 		console.log(i);
 		count++;
