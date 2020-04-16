@@ -17,7 +17,7 @@ function myFunction() {
     {
 				console.log("loading");
 				var url="https://"+$( "input#base_url" ).val()+"/Karaoke_system/get_songs.php?Version=0.0.1";
-        db = window.sqlitePlugin.openDatabase({name: "my.db", createFromLocation: 1});  // tries to use prepopulated database
+        //db = window.sqlitePlugin.openDatabase({name: "my.db", createFromLocation: 1});  // tries to use prepopulated database
 				var request = $.ajax({
 					url: url,
 					method: "POST",crossDomain: true, cache: false,
