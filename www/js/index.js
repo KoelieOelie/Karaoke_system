@@ -92,7 +92,7 @@ function render_songs(songs) {
 	load_page("main");
 	$("#info").addClass("hide");
 	var songs_contaner = $("data#songs_list");
-	var count = 0;
+	var count = -1;
 	console.log(JSON.stringify(songs));
 	songs.forEach((row, i) => {
 		var title = $.parseHTML(row.title,null,false).reduce((string,node)=> string += node.textContent, "" );
