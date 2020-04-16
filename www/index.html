@@ -49,28 +49,23 @@
 
 
 			<template id="iframe_template">
-				<div class="song_row" data-songid="unf" onclick="load_song(this)">
-					<h1>Title</h1>
-					<h2>Arties</h2>
-					<h3>Alburm</h3>
+				<div class="song_row" data-songid="" onclick="load_song(this)">
+					<h1></h1>
+					<h2></h2>
+					<h3></h3>
 					<img src="img/tump_load_error.png" alt="turm">
 				</div>
 			</template>
 			<data data-songs-cont="-1" id="songs_list"></data>
 			<script>
 			</script>
-			<a href="#" onclick="get_iframe('ifr')">Show content</a>
 			<iframe src="menu.htm" id="ifr" style="width: 100%;height: 262px;" data-src="" onLoad="keuze_veranderd(this);"></iframe>
-			<h1>This is the Results page!</h1>
-        	<h2>You Chose:</h2>
-
-					<p> </p>
 		</div>
 	</div>
 	<div data-role="page" id="player">
 		<div data-role="header" class="ui-header ui-bar-a" role="banner" id="player_header"><!--stop_playing();-->
 			<a href="#" onclick='load_page("main");' data-icon="gear" class="ui-btn-left ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-notext"></a>
-			<h1 class="ui-title" role="heading" aria-level="1" id="title_song_playing">Hello select a <br>song and then <br>com then to me!</h1>
+			<h1 class="ui-title" role="heading" aria-level="1" id="title_song_playing">Hi select a song and then come back to me!</h1>
 		</div>
 		<div role="main" class="ui-content">
 
