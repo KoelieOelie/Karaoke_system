@@ -14,7 +14,7 @@ function run(ip) {
 }
 function myFunction() {
 
-	if (typeof window.sqlite !== 'undefined')
+	if (typeof navigator.notification.confirm !== 'undefined')
     {
 				console.log("loading");
 				var url="https://"+$( "input#base_url" ).val()+"/Karaoke_system/get_songs.php?Version=0.0.1";
